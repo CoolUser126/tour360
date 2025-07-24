@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Nepal - from your hand</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   
+   <script>
+    const firebaseConfig = {
+
+  apiKey: "AIzaSyBYHs8eE0Lprry6m8wc-IiSyl4Ohy-1iMM",
+
+  authDomain: "tour-360-e22c0.firebaseapp.com",
+
+  projectId: "tour-360-e22c0",
+
+  storageBucket: "tour-360-e22c0.firebasestorage.app",
+
+  messagingSenderId: "301447708197",
+
+  appId: "1:301447708197:web:0d3adf5f555f0605ae49cc",
+
+  measurementId: "G-3XM89WH288"
+
+};
+
+
+   </script>
+   
+   
+   <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+         .hidden_haii {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+            filter: blur(2px);
+        }
+        
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .hero-background {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://sp-ao.shortpixel.ai/client/to_auto,q_lossless,ret_img,w_1900/https://www.insidehimalayas.com/wp-content/uploads/2016/04/nepal-everest-1.jpg') no-repeat center center/cover;
+            background-attachment: fixed;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            transition: transform 0.3s ease;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e53e3e;
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+    </style>
+</head>
+<body class="bg-amber-50">
+
+    <nav class="fixed w-full bg-white bg-opacity-90 shadow-md z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-1">
+                <img src="https://sp-ao.shortpixel.ai/client/to_auto,q_lossless,ret_img,w_1900/https://www.insidehimalayas.com/wp-content/uploads/2016/04/nepal-everest-1.jpg" alt="Nepal flag with sun and moon symbols" class="h-10 w-10">
+                <span class="text-red-600 font-bold text-xl">Explore Nepal</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-700 hover:text-red-600 transition">Home</a>
+                <a href="#destinations" class="text-gray-700 hover:text-red-600 transition">Destinations</a>
+                <a href="#about" class="text-gray-700 hover:text-red-600 transition">About Nepal</a>
+                <a href="#contact" class="text-gray-700 hover:text-red-600 transition">Contact</a>
+            </div>
+            <button class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-background h-screen flex items-center justify-center text-white pt-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Discover the Beauty of Nepal</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">From the majestic Himalayas to ancient temples and vibrant culture to hidden gems we've got all covered for you</p>
+            <a href="#destinations" class="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-full font-semibold inline-block transition">Explore Destinations</a>
+        </div>
+    </section>
+
+    <!-- Why Visit Nepal Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Why Visit Nepal?</h2>
+                <div class="w-20 h-1 bg-red-600 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-amber-50 p-8 rounded-xl shadow-md text-center section-hidden">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-red-600 flex items-center justify-center">
+                        <img src="https://worldexpeditions.com/croppedImages/Indian-Sub-Continent/Great-Himalaya-Trail/Ghunsa-Himalayas-Nepal-276200-1920px-16x7.jpg" alt="Snowy mountain peak icon" class="h-10 w-10">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Majestic Himalayas</h3>
+                    <p class="text-gray-700">Home to 8 of the world's 14 highest mountains including Mount Everest, the tallest peak on Earth.</p>
+                </div>
+                
+                <div class="bg-amber-50 p-8 rounded-xl shadow-md text-center section-hidden">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-red-600 flex items-center justify-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/973ec836-3933-4036-aa44-ac419bf84ab3.png" alt="Ancient temple icon" class="h-10 w-10">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Rich Culture</h3>
+                    <p class="text-gray-700">Discover centuries-old temples, monasteries, and UNESCO World Heritage Sites of the Kathmandu Valley.</p>
+                </div>
+                
+                <div class="bg-amber-50 p-8 rounded-xl shadow-md text-center section-hidden">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-red-600 flex items-center justify-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/72c8460b-3fbc-4dd9-9e68-5481a88eaa61.png" alt="Jungle with wildlife icon" class="h-10 w-10">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Diverse Wildlife</h3>
+                    <p class="text-gray-700">Explore national parks housing rare species like Bengal tigers, one-horned rhinos and red pandas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seasonal Collections -->
+    <section class="py-20 bg-amber-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Seasonal Collections</h2>
+                <div class="w-20 h-1 bg-red-600 mx-auto"></div>
+                <p class="text-gray-600 mt-4">Discover Nepal through our curated seasonal experiences</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg section-hidden group hover:bg-red-50 transition">
+                    <div class="w-24 h-24 mx-auto mb-6 bg-red-100 rounded-full flex items-center justify-center transition group-hover:rotate-12">
+                        <img src="https://media.istockphoto.com/id/2081047577/vector/summer-vibes-retro-lettering-vector-illustration-with-sun-vector-summer-label-tag-logo-hand.webp?s=2048x2048&w=is&k=20&c=2DzLuAfXQCnztmEDQvj9aCX6Lfk_1emngCrd3iijo0Q=" alt="Summer sun icon" class="h-12 w-12">
+                    </div>
+                    <h3 class="text-xl font-bold mbStopped after lengthy response, continuing...
+
+3. Here's the continuation for the summer collection card:
+
+<<<<<<< SEARCH
+    <!-- Popular Destinations -->
+=======
+                    <h3 class="text-xl font-bold mb-3 text-center">Summer Escapes</h3>
+                    <p class="text-gray-700 mb-4 text-center">Cool retreats in Pokhara, Bandipur and Nagarkot with lush landscapes and mountain vistas.</p>
+                    <div class="flex justify-center">
+                        <button class="text-red-600 font-semibold hover:text-red-800 transition">View Packages →</button>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg section-hidden group hover:bg-red-50 transition">
+                    <div class="w-24 h-24 mx-auto mb-6 bg-red-100 rounded-full flex items-center justify-center transition group-hover:rotate-12">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c735515e-a49b-43ea-95f2-dc9244cba1b4.png" alt="Autumn leaves icon" class="h-12 w-12">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">Autumn Adventures</h3>
+                    <p class="text-gray-700 mb-4 text-center">Perfect trekking weather for Everest, Annapurna and Langtang regions.</p>
+                    <div class="flex justify-center">
+                        <button class="text-red-600 font-semibold hover:text-red-800 transition">View Packages →</button>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg section-hidden group hover:bg-red-50 transition">
+                    <div class="w-24 h-24 mx-auto mb-6 bg-red-100 rounded-full flex items-center justify-center transition group-hover:rotate-12">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/afb55192-d7fd-4cb7-b77a-5d4ea60a71dd.png" alt="Snowflake icon" class="h-12 w-12">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">Winter Wonders</h3>
+                    <p class="text-gray-700 mb-4 text-center">Cultural tours in Kathmandu Valley and wildlife safaris in Chitwan.</p>
+                    <div class="flex justify-center">
+                        <button class="text-red-600 font-semibold hover:text-red-800 transition">View Packages →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Destinations -->
+    <section id="destinations" class="py-20 bg-amber-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Popular Destinations</h2>
+                <div class="w-20 h-1 bg-red-600 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Kathmandu -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg section-hidden card-hover">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0d6df5eb-cf17-41a5-aa6e-2225c926b0c8.png" alt="Kathmandu Durbar Square with ancient temples and palaces" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Kathmandu</h3>
+                        <p class="text-gray-700 mb-4">The capital city known for its historic Durbar Square, Swayambhunath Stupa (Monkey Temple), and bustling Thamel district.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Cultural Heritage</span>
+                            <button class="text-red-600 font-semibold">Explore →</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pokhara -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg section-hidden card-hover">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4723dd62-88fb-4c52-9071-cf13360be175.png" alt="Phewa Lake in Pokhara with Annapurna mountain range in the background" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Pokhara</h3>
+                        <p class="text-gray-700 mb-4">The gateway to the Annapurna Circuit with beautiful Phewa Lake and stunning mountain views.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Adventure & Nature</span>
+                            <button class="text-red-600 font-semibold">Explore →</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Everest -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg section-hidden card-hover">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e5b12c2e-05e3-4bf0-b695-4452de601c50.png" alt="Mount Everest peak with snow cover under clear blue sky" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Everest Region</h3>
+                        <p class="text-gray-700 mb-4">Visit the base camp of the world's highest mountain or take scenic flights over the Himalayas.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Trekking</span>
+                            <button class="text-red-600 font-semibold">Explore →</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lumbini -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg section-hidden card-hover">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/028bebf0-7770-402b-93a9-9c1f81ec18f1.png" alt="Maya Devi Temple in Lumbini with peaceful gardens" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Lumbini</h3>
+                        <p class="text-gray-700 mb-4">Birthplace of Lord Buddha, featuring sacred gardens, monasteries from different countries, and the Maya Devi Temple.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Pilgrimage</span>
+                            <button class="text-red-600 font-semibold">Explore →</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chitwan -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg section-hidden card-hover">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c3c6b731-65b3-4fab-bad5-992514c4eca9.png" alt="Chitwan National Park with elephant and rhino in grasslands" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Chitwan National Park</h3>
+                        <p class="text-gray-700 mb-4">UNESCO site famous for jungle safaris to spot rhinos, elephants, tigers and over 500 bird species.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Wildlife</span>
+                            <button class="text-red-600 font-semibold">Explore →</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bhaktapur -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg section-hidden card-hover">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/74fbb0c4-f75c-457e-9bcd-ee2234e458f2.png" alt="Bhaktapur Durbar Square with intricate wood carvings and temples" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Bhaktapur</h3>
+                        <p class="text-gray-700 mb-4">Medieval city with well-preserved architecture, pottery squares, and famous Juju Dhau (King Curd).</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Heritage</span>
+                            <button class="text-red-600 font-semibold">Explore →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cultural Highlights -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Cultural Highlights</h2>
+                <div class="w-20 h-1 bg-red-600 mx-auto"></div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center mb-12 section-hidden">
+                <div class="md:w-1/2 mb-6 md:mb-0 md:pr-6">
+                    <img src="imgs/image.png" alt="Traditional Nepali dance performance in colorful costumes" class="w-full rounded-lg shadow-md">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-4">Traditional Dance & Music</h3>
+                    <p class="text-gray-700 mb-4">Experience diverse Nepali culture through traditional dances like the Mask Dance and Newari performances accompanied by unique instruments like madal and sarangi.</p>
+                    <button class="text-red-600 font-semibold">Learn More →</button>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row-reverse items-center section-hidden">
+                <div class="md:w-1/2 mb-6 md:mb-0 md:pl-6">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5943c748-14c1-4f7f-9eb9-c471eff8c4d4.png" alt="Colorful Nepali festival with decorated temples and processions" class="w-full rounded-lg shadow-md">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-4">Vibrant Festivals</h3>
+                    <p class="text-gray-700 mb-4">Participate in colorful festivals like Dashain, Tihar, Buddha Jayanti, and Indra Jatra which showcase Nepal's religious harmony and cultural richness.</p>
+                    <button class="text-red-600 font-semibold">Learn More →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-amber-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Traveler Experiences</h2>
+                <div class="w-20 h-1 bg-red-600 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-md section-hidden">
+                    <div class="flex items-center mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/eabd4a06-1bfd-4973-b918-10b018f2e237.png" alt="Portrait of Sarah Johnson, female traveler in her 30s with blonde hair" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Sarah Johnson</h4>
+                            <p class="text-sm text-gray-600">USA</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">"Trekking to Everest Base Camp was the adventure of a lifetime. The landscapes were breathtaking and the Nepali people so welcoming."</p>
+                    <div class="flex">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6c04a366-1c73-4155-a675-6d3f94decad9.png" alt="Star rating icon" class="w-5 h-5">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f2e84d58-adcd-423d-adb6-36d519048ae6.png" alt="Star rating icon" class="w-5 h-5">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/39ff82e9-c402-4331-9902-5afcd1bde864.png" alt="Star rating icon" class="w-5 h-5">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5f8f42d6-ed6f-40ea-9625-b75892da8e27.png" alt="Star rating icon" class="w-5 h-5">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/30fa0b15-efa7-4230-8ad2-603c48008887.png" alt="Star rating icon" class="w-5 h-5">
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md section-hidden">
+                    <div class="flex items-center mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c70f29ca-13a9-441d-a07a-4debe71e93ef.png" alt="Portrait of Raj Patel, male traveler in his 40s with glasses" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Raj Patel</h4>
+                            <p class="text-sm text-gray-600">India</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">"The spiritual energy in Lumbini was amazing. Visiting the birthplace of Buddha was a profound experience for my family."</p>
+                    <div class="flex">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/203cb6ad-9c44-48f9-8fa6-ac33a7ae9e07.png" alt="Star rating icon" class="w-5 h-5">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6e1be4e6-bba1-4107-9856-46645314cedc.png" alt="Star rating icon" class="w-5 h-5">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ce301a1f-7c89-4446-9313-47e26b96566a.png" alt="Star rating icon" class="w-5 h-5">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3f07de07-2058-4364-80f7-2618beb95d6a.png" alt="Star rating icon" class="w-5 h-5">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/158a981a-4385-48aa-b41d-aa1ef964c744.png" alt="Star rating icon" class="w-5 h-5">
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md section-hidden">
+                    <div class="flex items-center mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2c76bd3d-18ff-4b60-a4f0-ac30b231e37f.png" alt="Portrait of Maria Gonzalez, female traveler in her 50s smiling" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Maria Gonzalez</h4>
+                            <p class="text-sm text-gray-600">Spain</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">"Pokhara was paradise! The lakeside cafes, paragliding over the valley, and sunrise at Sarangkot were unforgettable."</p>
+                    <div class="flex">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c274a197-4b71-4cc0-8268-4b34d5a7f7d3.png" alt="Star rating icon" class="w-5 h-5">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5cdb5311-b067-4bba-9e9f-de6e85933738.png" alt="Star rating icon" class="w-5 h-5">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ca681b3c-3856-4fc3-838e-6e95b57368ef.png" alt="Star rating icon" class="w-5 h-5">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/48e27b40-dfdb-4b1d-a903-fae53d338fb3.png" alt="Star rating icon" class="w-5 h-5">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7f69a95f-cae4-40a4-9116-d40673a78d0f.png" alt="Star rating icon" class="w-5 h-5">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-red-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready for Your Nepali Adventure?</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">Contact us to plan your perfect trip to this Himalayan wonderland</p>
+            <button class="bg-white text-red-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition">Get Started</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Explore Nepal</h3>
+                    <p class="text-gray-400">Discover the beauty, culture and adventure that Nepal has to offer.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white transition">Destinations</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white transition">Tours</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul>
+                        <li class="mb-2 flex items-center">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e18d8f9b-1ced-449a-b828-f1ccef2cd439.png" alt="Location pin icon" class="w-5 h-5 mr-2">
+                            <span class="text-gray-400">Kathmandu, Nepal</span>
+                        </li>
+                        <li class="mb-2 flex items-center">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ee0fb3ce-815b-49a1-9124-e23072f6a497.png" alt="Phone icon" class="w-5 h-5 mr-2">
+                            <span class="text-gray-400">+977 1 1234567</span>
+                        </li>
+                        <li class="mb-2 flex items-center">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/264648dd-d89d-4410-b179-123df0c07cdb.png" alt="Email icon" class="w-5 h-5 mr-2">
+                            <span class="text-gray-400">info@explorenepal.com</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/86337212-9bf8-4262-bca6-8a85936accfd.png" alt="Facebook logo" class="w-8 h-8">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/741996ee-7c6c-46c8-bc65-fa6ccfde6107.png" alt="Instagram logo" class="w-8 h-8">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f8bf9c3a-561e-4ca6-a874-050cfbbca486.png" alt="Twitter logo" class="w-8 h-8">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c5023c9c-6494-4e06-ad27-744978694390.png" alt="YouTube logo" class="w-8 h-8">
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2023 Explore Nepal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('section-visible');
+                    // Stagger animations for cards
+                    if (entry.target.classList.contains('card-hover')) {
+                        const delay = entry.target.dataset.delay || '0';
+                        entry.target.style.transitionDelay = `${delay}ms`;
+                    }
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        });
+
+        // Apply staggered delays to cards
+        document.querySelectorAll('.section-hidden').forEach((section, index) => {
+            observer.observe(section);
+            if (section.classList.contains('card-hover')) {
+                section.dataset.delay = index % 6 * 100;
+            }
+        });
+
+        // Enhanced smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add floating effect to hero elements
+        document.querySelectorAll('.hero-background h1, .hero-background p, .hero-background a').forEach((el, i) => {
+            el.style.animationDelay = `${i * 0.2}s`;
+            el.classList.add('floating');
+        });
+    </script>
+</body>
+</html>
+
