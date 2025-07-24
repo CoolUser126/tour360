@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kathmandu - Nepal's Cultural Heart</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --earth: #8B5A2B;
+      --sage: #A2A582;
+      --pale: #F5F5DC;
+      --gold: #D4AF37;
+      --dark: #333333;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Open Sans', sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: var(--pale);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      color: var(--earth);
+    }
+    
+    header {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .hero-content {
+      position: absolute;
+      bottom: 20%;
+      left: 0;
+      width: 100%;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.5);
+      transform: translateY(30px);
+      opacity: 0;
+      transition: all 1s ease;
+    }
+    
+    .hero-content.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .section {
+      padding: 4rem 2rem;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .section.intro {
+      background-color: var(--pale);
+    }
+    
+    .section.history {
+      background-color: white;
+    }
+    
+    .section.gallery {
+      background-color: var(--pale);
+    }
+
+    .section.tourist-info {
+      background-color: white;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .info-card {
+      background-color: var(--pale);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .info-card h3 {
+      color: var(--earth);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 0.5rem;
+    }
+    
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    
+    .content-wrapper.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .content-wrapper:nth-child(even) {
+      transition-delay: 0.2s;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      height: 300px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover .gallery-caption {
+      transform: translateY(0);
+    }
+    
+    .parallax {
+      position: relative;
+      height: 60vh;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+    
+    .parallax-content {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 800px;
+      margin: 0 2rem;
+      transform: scale(0.9);
+      opacity: 0;
+      transition: all 1s ease;
+    }
+    
+    .parallax-content.show {
+      transform: scale(1);
+      opacity: 1;
+    }
+    
+    footer {
+      background-color: var(--earth);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    @media (max-width: 768px) {
+      .section {
+        padding: 2rem 1rem;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero-content {
+        bottom: 10%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero-image">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/931101cb-0c96-4b64-b183-72904c64eadb.png" alt="View of Kathmandu's Durbar Square with ancient temples and bustling streets" />
+    </div>
+    
+    <div class="hero-content" id="heroContent">
+      <h1>Kathmandu</h1>
+      <p>Where Temples Touch the Sky</p>
+    </div>
+  </header>
+  
+  <section class="section intro" id="intro">
+    <div class="content-wrapper" id="introContent">
+      <h2>A Living Museum of Newari Heritage</h2>
+      <p>Kathmandu, the capital of Nepal, is a mesmerizing blend of ancient traditions and modern energy. This UNESCO-listed valley city enchants visitors with its exquisite pagoda temples, bustling bazaars, and rich cultural tapestry woven over centuries.</p> 
+      <p>The air thrums with temple bells, incense and the prayers of pilgrims at sacred sites like Swayambhunath (Monkey Temple) and Pashupatinath. Every corner reveals artistic marvels - intricate wood carvings, gilded statues, and timeless courtyard palaces.</p>
+    </div>
+  </section>
+  
+  <div class="parallax" id="parallax1">
+    <div class="parallax-content" id="parallaxContent1">
+      <h2>"Lumbini stands as a testimony to Buddha's message of peace and compassion"</h2>
+    </div>
+  </div>
+  
+  <section class="section history" id="history">
+    <div class="content-wrapper" id="historyContent">
+      <h2>Timeless City of Temples</h2>
+      <p>Founded over 2000 years ago, Kathmandu flourished as the crossroads of Himalayan trade routes. The medieval Malla kings built magnificent Durbar Squares adorned with towering temples showcasing Newari architectural mastery.</p>
+      <p>The city preserves vibrant traditions - Kumari worship with living goddesses, sacred masked dances of Indra Jatra festival, and intricate crafting of metal statues and thangka paintings passed down through generations of Newari artisans.</p>
+    </div>
+  </section>
+  
+  <section class="section gallery" id="gallery">
+    <div class="content-wrapper" id="galleryContent">
+      <h2>Kathmandu Must-See Marvels</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fcaea03b-e6aa-4697-bc0f-fdfa31041de0.png" alt="Kathmandu Durbar Square's ancient temples and palaces" />
+          <div class="gallery-caption">
+            <h3>Durbar Square</h3>
+            <p>Historic center with exquisite pagoda temples</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/00bf9e87-51b1-4ebf-aeb0-55de2daadb20.png" alt="Tourists riding elephants through the jungle on safari" />
+          <div class="gallery-caption">
+            <h3>Elephant Safari</h3>
+            <p>Traditional way to explore the jungle and spot wildlife</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f1a6c706-e461-474b-976e-66c3030c9c0f.png" alt="Traditional dugout canoes on the Rapti River at sunset" />
+          <div class="gallery-caption">
+            <h3>River Canoeing</h3>
+            <p>Peaceful ride to spot crocodiles and water birds</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5ccee072-9375-43c0-8572-6311b1fe0fb4.png" alt="Traditional Tharu village with thatched roof houses" />
+          <div class="gallery-caption">
+            <h3>Tharu Village</h3>
+            <p>Experience indigenous culture and hospitality</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tourist-info" id="touristInfo">
+    <div class="content-wrapper" id="touristContent">
+      <h2>Visitor Information</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Best Time to Visit</h3>
+          <p>• September-November (pleasant weather)</p>
+          <p>• February-April (spring festival season)</p>
+          <p>• Bisket Jatra (April) showcases spectacular chariot festival</p>
+        </div>
+        <div class="info-card">
+          <h3>Estimated Costs</h3>
+          <p>• Entrance fee: ~$15 USD for foreigners</p>
+          <p>• Guided tours: ~$25/day</p>
+          <p>• Heritage hotels: $50-150/night</p>
+          <p>• Local eateries: $3-8 per meal</p>
+        </div>
+        <div class="info-card">
+          <h3>Travel Tips</h3>
+          <p>• Stay overnight to see daily life unfold</p>
+          <p>• Visit Pottery Square in the morning</p>
+          <p>• Explore Taumadhi Square at dusk</p>
+          <p>• Try Juju Dhau (royal curd) - Bhaktapur's specialty</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="parallax" id="parallax2">
+    <div class="parallax-content" id="parallaxContent2">
+      <h2>"Visiting Lumbini is stepping into the living history of Buddhism"</h2>
+    </div>
+  </div>
+  
+  <footer>
+    <p>© 2023 Bhaktapur Conservation Project. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Set parallax backgrounds
+    document.getElementById('parallax1').style.backgroundImage = 'url("https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5217ed3e-7e04-4f80-b352-326276210b2f.png")';
+    document.getElementById('parallax2').style.backgroundImage = 'url("https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7b8d22ac-6517-4b87-bd9a-d332ec60b82d.png")';
+    
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observerCallback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+    
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    
+    // Observe all animated elements
+    const animatedElements = [
+      document.getElementById('heroContent'),
+      document.getElementById('introContent'),
+      document.getElementById('parallaxContent1'),
+      document.getElementById('historyContent'),
+      document.getElementById('galleryContent'),
+      document.getElementById('touristContent'),
+      document.getElementById('parallaxContent2')
+    ];
+    
+    animatedElements.forEach(element => {
+      if (element) observer.observe(element);
+    });
+    
+    // Trigger hero animation immediately (after slight delay)
+    setTimeout(() => {
+      const hero = document.getElementById('heroContent');
+      if (hero) hero.classList.add('show');
+    }, 300);
+    
+    // Add scroll event for gallery items
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const galleryObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+    
+    galleryItems.forEach((item, index) => {
+      item.style.transitionDelay = `${index * 0.1}s`;
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(20px)';
+      galleryObserver.observe(item);
+    });
+  </script>
+</body>
+</html>
+

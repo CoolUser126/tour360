@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bhaktapur - Nepal's Living Heritage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --earth: #8B5A2B;
+      --sage: #A2A582;
+      --pale: #F5F5DC;
+      --gold: #D4AF37;
+      --dark: #333333;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Open Sans', sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: var(--pale);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      color: var(--earth);
+    }
+    
+    header {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .hero-content {
+      position: absolute;
+      bottom: 20%;
+      left: 0;
+      width: 100%;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.5);
+      transform: translateY(30px);
+      opacity: 0;
+      transition: all 1s ease;
+    }
+    
+    .hero-content.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .section {
+      padding: 4rem 2rem;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .section.intro {
+      background-color: var(--pale);
+    }
+    
+    .section.history {
+      background-color: white;
+    }
+    
+    .section.gallery {
+      background-color: var(--pale);
+    }
+
+    .section.tourist-info {
+      background-color: white;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .info-card {
+      background-color: var(--pale);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .info-card h3 {
+      color: var(--earth);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 0.5rem;
+    }
+    
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    
+    .content-wrapper.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .content-wrapper:nth-child(even) {
+      transition-delay: 0.2s;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      height: 300px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover .gallery-caption {
+      transform: translateY(0);
+    }
+    
+    .parallax {
+      position: relative;
+      height: 60vh;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+    
+    .parallax-content {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 800px;
+      margin: 0 2rem;
+      transform: scale(0.9);
+      opacity: 0;
+      transition: all 1s ease;
+    }
+    
+    .parallax-content.show {
+      transform: scale(1);
+      opacity: 1;
+    }
+    
+    footer {
+      background-color: var(--earth);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    @media (max-width: 768px) {
+      .section {
+        padding: 2rem 1rem;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero-content {
+        bottom: 10%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero-image">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ecf85db0-98b5-4cda-9d06-0145c24dad7c.png" alt="Ancient Bhaktapur Durbar Square showing traditional Newari architecture and temples" />
+    </div>
+    
+    <div class="hero-content" id="heroContent">
+      <h1>Bhaktapur</h1>
+      <p>Nepal's Living Heritage City</p>
+    </div>
+  </header>
+  
+  <section class="section intro" id="intro">
+    <div class="content-wrapper" id="introContent">
+      <h2>The Medieval Jewel of Nepal</h2>
+      <p>Bhaktapur, located in the Kathmandu Valley, is one of Nepal's best preserved medieval cities and a UNESCO World Heritage Site. This ancient Newari kingdom boasts magnificent temples, palaces and artistic courtyards dating back to the 12th century.</p>
+      <p>The city remains a living museum of traditional Newari culture, with artisans continuing centuries-old crafts like pottery and wood carving.</p>
+    </div>
+  </section>
+  
+  <div class="parallax" id="parallax1">
+    <div class="parallax-content" id="parallaxContent1">
+      <h2>"a glimpse of what a royal Nepalese city looked like 800 years ago"</h2>
+    </div>
+  </div>
+  
+  <section class="section history" id="history">
+    <div class="content-wrapper" id="historyContent">
+      <h2>A Living History</h2>
+      <p>Founded in the 12th century, Bhaktapur was the capital of Nepal during the great Malla Kingdom until the 15th century. The city's golden age saw the construction of its iconic temples, palaces and public squares.</p>
+      <p>Unlike Kathmandu and Patan, Bhaktapur avoided rapid modernization and retains its traditional urban fabric with brick-paved streets, historic water systems, and vernacular Newari architecture.</p>
+    </div>
+  </section>
+  
+  <section class="section gallery" id="gallery">
+    <div class="content-wrapper" id="galleryContent">
+      <h2>Bhaktapur's Must-See Places</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4dfa5422-8a0c-4aa5-b8bd-c921073cb1c4.png" alt="Bhaktapur Durbar Square with its iconic palaces and temples" />
+          <div class="gallery-caption">
+            <h3>Durbar Square</h3>
+            <p>55-Window Palace and Golden Gate</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e641638d-4fd3-44e1-837f-964ad274c89c.png" alt="Five-story Nyatapola Temple with its massive steps" />
+          <div class="gallery-caption">
+            <h3>Nyatapola Temple</h3>
+            <p>Nepal's tallest temple at Taumadhi Square</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/e9/29/86/pottery-square-a-small.jpg?w=800&h=500&s=1" alt="Traditional pottery making in Bhaktapur's historic square" />
+          <div class="gallery-caption">
+            <h3>Pottery Square</h3>
+            <p>See artisans shaping clay using ancient techniques</p>
+          </div>
+        </div>
+  </section>
+
+  <section class="section tourist-info" id="touristInfo">
+    <div class="content-wrapper" id="touristContent">
+      <h2>Visitor Information</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Best Time to Visit</h3>
+          <p>• September-November (pleasant weather)</p>
+          <p>• February-April (spring festival season)</p>
+          <p>• Bisket Jatra (April) showcases spectacular chariot festival</p>
+        </div>
+        <div class="info-card">
+          <h3>Estimated Costs</h3>
+          <p>• Entrance fee: ~$15 USD for foreigners</p>
+          <p>• Guided tours: ~$25/day</p>
+          <p>• Heritage hotels: $50-150/night</p>
+          <p>• Local eateries: $3-8 per meal</p>
+        </div>
+        <div class="info-card">
+          <h3>Travel Tips</h3>
+          <p>• Stay overnight to see daily life unfold</p>
+          <p>• Visit Pottery Square in the morning</p>
+          <p>• Explore Taumadhi Square at dusk</p>
+          <p>• Try Juju Dhau (royal curd) - Bhaktapur's specialty</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="parallax" id="parallax2">
+    <div class="parallax-content" id="parallaxContent2">
+      <h2>"a living museum of medieval art and culture"</h2>
+    </div>
+  </div>
+  
+  <footer>
+    <p>© 2023 Bhaktapur Conservation Project. All rights reserved.</p>
+  </footer>
+
+  <script>
+    
+    document.getElementById('parallax1').style.backgroundImage = 'url("https://assets-cdn.kathmandupost.com/uploads/source/news/2020/opinion/7-lead-for-online%20(7).jpg")';
+    document.getElementById('parallax2').style.backgroundImage = 'url("https://scontent.fktm10-1.fna.fbcdn.net/v/t1.6435-9/115888317_2359863224318014_1505360179841271487_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=ZZeTMS0ec2QQ7kNvwG09Zwo&_nc_oc=AdmzLFNtwMJn5py9pg56ksMLnQfj-4FkBzUKWqLiZJICuXq5hSCH4bObubJ8dT-qvGFglgla8RFUei45vKZDLUKC&_nc_zt=23&_nc_ht=scontent.fktm10-1.fna&_nc_gid=F4fk9SuIPlm3k3JKv5ZLAg&oh=00_AfT2Kiu4Zha8zGYMkfvwHg6UX6ba6JlZDaGoRR9Rkk_Tgg&oe=68AA09D6")';
+    
+
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observerCallback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+    
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    
+   
+    const animatedElements = [
+      document.getElementById('heroContent'),
+      document.getElementById('introContent'),
+      document.getElementById('parallaxContent1'),
+      document.getElementById('historyContent'),
+      document.getElementById('galleryContent'),
+      document.getElementById('touristContent'),
+      document.getElementById('parallaxContent2')
+    ];
+    
+    animatedElements.forEach(element => {
+      if (element) observer.observe(element);
+    });
+    
+    setTimeout(() => {
+      const hero = document.getElementById('heroContent');
+      if (hero) hero.classList.add('show');
+    }, 300);
+    
+    
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const galleryObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+    
+    galleryItems.forEach((item, index) => {
+      item.style.transitionDelay = `${index * 0.1}s`;
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(20px)';
+      galleryObserver.observe(item);
+    });
+  </script>
+</body>
+</html>
+

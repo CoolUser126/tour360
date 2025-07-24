@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumbini - Birthplace of Buddha</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --earth: #8B5A2B;
+      --sage: #A2A582;
+      --pale: #F5F5DC;
+      --gold: #D4AF37;
+      --dark: #333333;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Open Sans', sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: var(--pale);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      color: var(--earth);
+    }
+    
+    header {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .hero-content {
+      position: absolute;
+      bottom: 20%;
+      left: 0;
+      width: 100%;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.5);
+      transform: translateY(30px);
+      opacity: 0;
+      transition: all 1s ease;
+    }
+    
+    .hero-content.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .section {
+      padding: 4rem 2rem;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .section.intro {
+      background-color: var(--pale);
+    }
+    
+    .section.history {
+      background-color: white;
+    }
+    
+    .section.gallery {
+      background-color: var(--pale);
+    }
+
+    .section.tourist-info {
+      background-color: white;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .info-card {
+      background-color: var(--pale);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .info-card h3 {
+      color: var(--earth);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 0.5rem;
+    }
+    
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    
+    .content-wrapper.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .content-wrapper:nth-child(even) {
+      transition-delay: 0.2s;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      height: 300px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .gallery-item img {
+      width: 300%;
+      height: 300%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover .gallery-caption {
+      transform: translateY(0);
+    }
+    
+    .parallax {
+      position: relative;
+      height: 60vh;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+    
+    .parallax-content {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 800px;
+      margin: 0 2rem;
+      transform: scale(0.9);
+      opacity: 0;
+      transition: all 1s ease;
+    }
+    
+    .parallax-content.show {
+      transform: scale(1);
+      opacity: 1;
+    }
+    
+    footer {
+      background-color: var(--earth);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    @media (max-width: 768px) {
+      .section {
+        padding: 2rem 1rem;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero-content {
+        bottom: 10%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero-image">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/858f6d2c-f8f3-4a2e-bd13-d7badc612ce3.png" alt="Golden morning light over Maya Devi Temple in Lumbini with prayer flags fluttering in the breeze" />
+    </div>
+    
+    <div class="hero-content" id="heroContent">
+      <h1>Lumbini</h1>
+      <p>The Sacred Birthplace of Buddha</p>
+    </div>
+  </header>
+  
+  <section class="section intro" id="intro">
+    <div class="content-wrapper" id="introContent">
+      <h2>The Spiritual Heart of Buddhism</h2>
+      <p>Lumbini, located in the Terai plains of southern Nepal, is one of the most sacred pilgrimage sites for Buddhists worldwide. It was here that Queen Maya Devi gave birth to Siddhartha Gautama in 623 BCE, who would later become the Buddha.</p>
+      <p>This UNESCO World Heritage Site encompasses monasteries, archaeological remains, and sacred ponds that create a serene atmosphere of peace and meditation.</p>
+    </div>
+  </section>
+  
+  <div class="parallax" id="parallax1">
+    <div class="parallax-content" id="parallaxContent1">
+      <h2>"Lumbini stands as a testimony to Buddha's message of peace and compassion"</h2>
+    </div>
+  </div>
+  
+  <section class="section history" id="history">
+    <div class="content-wrapper" id="historyContent">
+      <h2>Historical Significance</h2>
+      <p>The sacred site was rediscovered in 1896 when archaeologists identified the Ashoka Pillar erected by Emperor Ashoka in 249 BCE to commemorate his pilgrimage to Buddha's birthplace.</p>
+      <p>Excavations revealed the Maya Devi Temple built directly over the spot where Buddha was born, with the Marker Stone and Nativity Sculpture marking the exact location.</p>
+    </div>
+  </section>
+  
+  <section class="section gallery" id="gallery">
+    <div class="content-wrapper" id="galleryContent">
+      <h2>Sacred Sites of Lumbini</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6cc2611f-ebe1-4e31-a8bc-6f901709f218.png" alt="Detailed view of the Ashoka pillar with ancient inscriptions in Lumbini" />
+          <div class="gallery-caption">
+            <h3>Ashoka Pillar</h3>
+            <p>Erected in 249 BCE to mark Buddha's birthplace</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2f79e11d-9e5b-46f0-b5f4-01c7ca9054aa.png" alt="Maya Devi Temple complex with devotees meditating in the peaceful surroundings" />
+          <div class="gallery-caption">
+            <h3>Maya Devi Temple</h3>
+            <p>Built over the exact birthplace of Buddha</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8f223a0b-db15-4c88-8038-5dad2f03a1d5.png" alt="Peaceful sacred pond in Lumbini with lotus flowers and reflection of monastery" />
+          <div class="gallery-caption">
+            <h3>Sacred Pond</h3>
+            <p>Where Queen Maya Devi bathed before giving birth</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dde99671-384b-4013-8f2b-2128b1320f44.png" alt="Row of international monasteries showcasing diverse Buddhist architectural styles in Lumbini" />
+          <div class="gallery-caption">
+            <h3>Monastery Zone</h3>
+            <p>International monasteries representing different Buddhist traditions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tourist-info" id="touristInfo">
+    <div class="content-wrapper" id="touristContent">
+      <h2>Visitor Information</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Best Time to Visit</h3>
+          <p>• October to March (pleasant weather)</p>
+          <p>• Avoid monsoon season (June-September)</p>
+          <p>• Buddha Purnima festival (April/May) is extra special</p>
+        </div>
+        <div class="info-card">
+          <h3>Estimated Costs</h3>
+          <p>• Entrance fee: ~$10 USD</p>
+          <p>• Guides: ~$20/day</p>
+          <p>• Basic hotel: $30-50/night</p>
+          <p>• Meals: $5-10 per person</p>
+        </div>
+        <div class="info-card">
+          <h3>Travel Tips</h3>
+          <p>• Stay 2-3 days for full experience</p>
+          <p>• Dress modestly (shoulders/knees covered)</p>
+          <p>• Remove shoes at sacred sites</p>
+          <p>• Morning visits recommended for peaceful atmosphere</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="parallax" id="parallax2">
+    <div class="parallax-content" id="parallaxContent2">
+      <h2>"Visiting Lumbini is stepping into the living history of Buddhism"</h2>
+    </div>
+  </div>
+  
+  <footer>
+    <p>© 2023 Lumbini Heritage Site. All rights reserved.</p>
+  </footer>
+
+  <script>
+  
+    document.getElementById('parallax1').style.backgroundImage = 'url("https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/abc3f51c-ce5e-401c-996f-947dac146868.png")';
+    document.getElementById('parallax2').style.backgroundImage = 'url("https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0f15d4b2-cbe3-4bbf-a0a8-2b8348b4f0de.png")';
+    
+    
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observerCallback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+    
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    
+    
+    const animatedElements = [
+      document.getElementById('heroContent'),
+      document.getElementById('introContent'),
+      document.getElementById('parallaxContent1'),
+      document.getElementById('historyContent'),
+      document.getElementById('galleryContent'),
+      document.getElementById('touristContent'),
+      document.getElementById('parallaxContent2')
+    ];
+    
+    animatedElements.forEach(element => {
+      if (element) observer.observe(element);
+    });
+    
+   
+    setTimeout(() => {
+      const hero = document.getElementById('heroContent');
+      if (hero) hero.classList.add('show');
+    }, 300);
+    
+    
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const galleryObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+    
+    galleryItems.forEach((item, index) => {
+      item.style.transitionDelay = `${index * 0.1}s`;
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(20px)';
+      galleryObserver.observe(item);
+    });
+  </script>
+</body>
+</html>
+

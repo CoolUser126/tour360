@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chitwan - Nepal's Wildlife Paradise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --earth: #8B5A2B;
+      --sage: #A2A582;
+      --pale: #F5F5DC;
+      --gold: #D4AF37;
+      --dark: #333333;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Open Sans', sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: var(--pale);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      color: var(--earth);
+    }
+    
+    header {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .hero-content {
+      position: absolute;
+      bottom: 20%;
+      left: 0;
+      width: 100%;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.5);
+      transform: translateY(30px);
+      opacity: 0;
+      transition: all 1s ease;
+    }
+    
+    .hero-content.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .section {
+      padding: 4rem 2rem;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .section.intro {
+      background-color: var(--pale);
+    }
+    
+    .section.history {
+      background-color: white;
+    }
+    
+    .section.gallery {
+      background-color: var(--pale);
+    }
+
+    .section.tourist-info {
+      background-color: white;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .info-card {
+      background-color: var(--pale);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .info-card h3 {
+      color: var(--earth);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 0.5rem;
+    }
+    
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    
+    .content-wrapper.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .content-wrapper:nth-child(even) {
+      transition-delay: 0.2s;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      height: 300px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover .gallery-caption {
+      transform: translateY(0);
+    }
+    
+    .parallax {
+      position: relative;
+      height: 60vh;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+    
+    .parallax-content {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 800px;
+      margin: 0 2rem;
+      transform: scale(0.9);
+      opacity: 0;
+      transition: all 1s ease;
+    }
+    
+    .parallax-content.show {
+      transform: scale(1);
+      opacity: 1;
+    }
+    
+    footer {
+      background-color: var(--earth);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    @media (max-width: 768px) {
+      .section {
+        padding: 2rem 1rem;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero-content {
+        bottom: 10%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero-image">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/643ae8d9-17d7-464d-8cd2-5ae0425088dc.png" alt="Scenic view of Chitwan National Park with grasslands and wildlife" />
+    </div>
+    
+    <div class="hero-content" id="heroContent">
+      <h1>Chitwan</h1>
+      <p>Nepal's Wildlife Paradise</p>
+    </div>
+  </header>
+  
+  <section class="section intro" id="intro">
+    <div class="content-wrapper" id="introContent">
+      <h2>Jungle Safari Wonderland</h2>
+      <p>Chitwan National Park, Nepal's first national park established in 1973, is a UNESCO World Heritage Site renowned for its incredible biodiversity. The park is home to rare animals like the one-horned rhinoceros, Bengal tigers, and over 500 bird species.</p>
+      <p>Visitors can experience thrilling jungle safaris, elephant rides, canoe trips, and traditional Tharu cultural performances in this biodiverse Terai region.</p>
+    </div>
+  </section>
+  
+  <div class="parallax" id="parallax1">
+    <div class="parallax-content" id="parallaxContent1">
+      <h2>"Lumbini stands as a testimony to Buddha's message of peace and compassion"</h2>
+    </div>
+  </div>
+  
+  <section class="section history" id="history">
+    <div class="content-wrapper" id="historyContent">
+      <h2>Tharu Culture</h2>
+      <p>The indigenous Tharu people have inhabited the Chitwan region for centuries, developing unique cultural traditions and sustainable practices for living alongside wildlife. Their stilt-house villages and colorful festivals showcase a vibrant heritage.</p>
+      <p>The Tharu Museum offers insight into their traditional lifestyles including fishing techniques, farming methods, and beautiful handicrafts made from jungle materials.</p>
+    </div>
+  </section>
+  
+  <section class="section gallery" id="gallery">
+    <div class="content-wrapper" id="galleryContent">
+      <h2>Chitwan Park Attractions</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8056a333-c2b3-462c-8b4c-4f50754bfdc6.png" alt="One-horned rhinoceros grazing in Chitwan National Park" />
+          <div class="gallery-caption">
+            <h3>Rhino Watching</h3>
+            <p>See endangered one-horned rhinos in their natural habitat</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://www.rhinolandchitwan.com/images/2nights/1.jpg" />
+          <div class="gallery-caption">
+            <h3>Elephant Safari</h3>
+            <p>Traditional way to explore the jungle and spot wildlife</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://www.rhinolandchitwan.com/images/canoe-ride/1.jpg" alt="Traditional dugout canoes on the Rapti River at sunset" />
+          <div class="gallery-caption">
+            <h3>River Canoeing</h3>
+            <p>Peaceful ride to spot crocodiles and water birds</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5ccee072-9375-43c0-8572-6311b1fe0fb4.png" alt="Traditional Tharu village with thatched roof houses" />
+          <div class="gallery-caption">
+            <h3>Tharu Village</h3>
+            <p>Experience indigenous culture and hospitality</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tourist-info" id="touristInfo">
+    <div class="content-wrapper" id="touristContent">
+      <h2>Visitor Information</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Best Time to Visit</h3>
+          <p>• September-November (pleasant weather)</p>
+          <p>• February-April (spring festival season)</p>
+          <p>• Bisket Jatra (April) showcases spectacular chariot festival</p>
+        </div>
+        <div class="info-card">
+          <h3>Estimated Costs</h3>
+          <p>• Entrance fee: ~$15 USD for foreigners</p>
+          <p>• Guided tours: ~$25/day</p>
+          <p>• Heritage hotels: $50-150/night</p>
+          <p>• Local eateries: $3-8 per meal</p>
+        </div>
+        <div class="info-card">
+          <h3>Travel Tips</h3>
+          <p>• Stay overnight to see daily life unfold</p>
+          <p>• Visit Pottery Square in the morning</p>
+          <p>• Explore Taumadhi Square at dusk</p>
+          <p>• Try Juju Dhau (royal curd) - Bhaktapur's specialty</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="parallax" id="parallax2">
+    <div class="parallax-content" id="parallaxContent2">
+      <h2>" a popular destination for wildlife enthusiasts"</h2>
+    </div>
+  </div>
+  
+  <footer>
+    <p>© 2023 Bhaktapur Conservation Project. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Set parallax backgrounds
+    document.getElementById('parallax1').style.backgroundImage = 'url("https://www.wanderlustmagazine.com/wp-content/uploads/2023/11/cropped-dreamstime_xxl_68762448-scaled.jpg")';
+    document.getElementById('parallax2').style.backgroundImage = 'url("https://www.magnificenthimalayan.com/public/uploads/chitwan-jungle-safari.jpg")';
+    
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observerCallback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+    
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    
+    // Observe all animated elements
+    const animatedElements = [
+      document.getElementById('heroContent'),
+      document.getElementById('introContent'),
+      document.getElementById('parallaxContent1'),
+      document.getElementById('historyContent'),
+      document.getElementById('galleryContent'),
+      document.getElementById('touristContent'),
+      document.getElementById('parallaxContent2')
+    ];
+    
+    animatedElements.forEach(element => {
+      if (element) observer.observe(element);
+    });
+    
+    // Trigger hero animation immediately (after slight delay)
+    setTimeout(() => {
+      const hero = document.getElementById('heroContent');
+      if (hero) hero.classList.add('show');
+    }, 300);
+    
+    // Add scroll event for gallery items
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const galleryObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+    
+    galleryItems.forEach((item, index) => {
+      item.style.transitionDelay = `${index * 0.1}s`;
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(20px)';
+      galleryObserver.observe(item);
+    });
+  </script>
+</body>
+</html>
+

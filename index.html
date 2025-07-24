@@ -7,29 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
    
-   <script>
-    const firebaseConfig = {
-
-  apiKey: "AIzaSyBYHs8eE0Lprry6m8wc-IiSyl4Ohy-1iMM",
-
-  authDomain: "tour-360-e22c0.firebaseapp.com",
-
-  projectId: "tour-360-e22c0",
-
-  storageBucket: "tour-360-e22c0.firebasestorage.app",
-
-  messagingSenderId: "301447708197",
-
-  appId: "1:301447708197:web:0d3adf5f555f0605ae49cc",
-
-  measurementId: "G-3XM89WH288"
-
-};
-
-
-   </script>
-   
-   
+    
    <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -94,10 +72,10 @@
                 <span class="text-red-600 font-bold text-xl">Explore Nepal</span>
             </div>
             <div class="hidden md:flex space-x-8">
-                <a href="#home" class="text-gray-700 hover:text-red-600 transition">Home</a>
+                <a href="index.html" class="text-gray-700 hover:text-red-600 transition">Home</a>
                 <a href="#destinations" class="text-gray-700 hover:text-red-600 transition">Destinations</a>
                 <a href="#about" class="text-gray-700 hover:text-red-600 transition">About Nepal</a>
-                <a href="#contact" class="text-gray-700 hover:text-red-600 transition">Contact</a>
+                <a href="details/login.html" class="text-gray-700 hover:text-red-600 transition">login</a>
             </div>
             <button class="md:hidden focus:outline-none">
                 <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -177,7 +155,7 @@
                     <h3 class="text-xl font-bold mb-3 text-center">Summer Escapes</h3>
                     <p class="text-gray-700 mb-4 text-center">Cool retreats in Pokhara, Bandipur and Nagarkot with lush landscapes and mountain vistas.</p>
                     <div class="flex justify-center">
-                        <button class="text-red-600 font-semibold hover:text-red-800 transition">View Packages →</button>
+                        <button class="text-red-600 font-semibold hover:text-red-800 transition"> <a href="pages/summer escape.html"> View Packages →</a></button>
                     </div>
                 </div>
                 
@@ -188,7 +166,7 @@
                     <h3 class="text-xl font-bold mb-3 text-center">Autumn Adventures</h3>
                     <p class="text-gray-700 mb-4 text-center">Perfect trekking weather for Everest, Annapurna and Langtang regions.</p>
                     <div class="flex justify-center">
-                        <button class="text-red-600 font-semibold hover:text-red-800 transition">View Packages →</button>
+                        <button class="text-red-600 font-semibold hover:text-red-800 transition"><a href="pages/Autumn Adventure.html">View Packages →</a></button>
                     </div>
                 </div>
                 
@@ -199,7 +177,7 @@
                     <h3 class="text-xl font-bold mb-3 text-center">Winter Wonders</h3>
                     <p class="text-gray-700 mb-4 text-center">Cultural tours in Kathmandu Valley and wildlife safaris in Chitwan.</p>
                     <div class="flex justify-center">
-                        <button class="text-red-600 font-semibold hover:text-red-800 transition">View Packages →</button>
+                        <button class="text-red-600 font-semibold hover:text-red-800 transition"><a href="pages/winterwonders.html">View Packages →</a></button>
                     </div>
                 </div>
             </div>
@@ -210,7 +188,7 @@
     <section id="destinations" class="py-20 bg-amber-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Popular Destinations</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">All Time Favorites</h2>
                 <div class="w-20 h-1 bg-red-600 mx-auto"></div>
             </div>
             
@@ -236,7 +214,7 @@
                         <p class="text-gray-700 mb-4">The gateway to the Annapurna Circuit with beautiful Phewa Lake and stunning mountain views.</p>
                         <div class="flex justify-between items-center">
                             <span class="text-sm text-gray-600">Adventure & Nature</span>
-                            <button class="text-red-600 font-semibold">Explore →</button>
+                            <button class="text-red-600 font-semibold"><a href="alltimefav/pokhara.html">Explore →</a></button>
                         </div>
                     </div>
                 </div>
@@ -249,7 +227,7 @@
                         <p class="text-gray-700 mb-4">Visit the base camp of the world's highest mountain or take scenic flights over the Himalayas.</p>
                         <div class="flex justify-between items-center">
                             <span class="text-sm text-gray-600">Trekking</span>
-                            <button class="text-red-600 font-semibold">Explore →</button>
+                            <button class="text-red-600 font-semibold"> <a href="alltimefav/everestbase.html">Explore →</a></button>
                         </div>
                     </div>
                 </div>
@@ -262,7 +240,7 @@
                         <p class="text-gray-700 mb-4">Birthplace of Lord Buddha, featuring sacred gardens, monasteries from different countries, and the Maya Devi Temple.</p>
                         <div class="flex justify-between items-center">
                             <span class="text-sm text-gray-600">Pilgrimage</span>
-                            <button class="text-red-600 font-semibold">Explore →</button>
+                            <button class="text-red-600 font-semibold"><a href="alltimefav/lumbini.html">Explore →</a></button>
                         </div>
                     </div>
                 </div>
@@ -275,7 +253,7 @@
                         <p class="text-gray-700 mb-4">UNESCO site famous for jungle safaris to spot rhinos, elephants, tigers and over 500 bird species.</p>
                         <div class="flex justify-between items-center">
                             <span class="text-sm text-gray-600">Wildlife</span>
-                            <button class="text-red-600 font-semibold">Explore →</button>
+                            <button class="text-red-600 font-semibold"><a href="alltimefav/chitwan.html">Explore →</a>Explore →</button>
                         </div>
                     </div>
                 </div>
@@ -288,7 +266,7 @@
                         <p class="text-gray-700 mb-4">Medieval city with well-preserved architecture, pottery squares, and famous Juju Dhau (King Curd).</p>
                         <div class="flex justify-between items-center">
                             <span class="text-sm text-gray-600">Heritage</span>
-                            <button class="text-red-600 font-semibold">Explore →</button>
+                            <button class="text-red-600 font-semibold"><a href="alltimefav/bhaktapur.html">Explore →</a></button>
                         </div>
                     </div>
                 </div>
@@ -311,7 +289,7 @@
                 <div class="md:w-1/2">
                     <h3 class="text-2xl font-bold mb-4">Traditional Dance & Music</h3>
                     <p class="text-gray-700 mb-4">Experience diverse Nepali culture through traditional dances like the Mask Dance and Newari performances accompanied by unique instruments like madal and sarangi.</p>
-                    <button class="text-red-600 font-semibold">Learn More →</button>
+                    <button class="text-red-600 font-semibold">  <a href="cultural_dancees.html">Learn More →  </a></button>
                 </div>
             </div>
             
@@ -322,7 +300,7 @@
                 <div class="md:w-1/2">
                     <h3 class="text-2xl font-bold mb-4">Vibrant Festivals</h3>
                     <p class="text-gray-700 mb-4">Participate in colorful festivals like Dashain, Tihar, Buddha Jayanti, and Indra Jatra which showcase Nepal's religious harmony and cultural richness.</p>
-                    <button class="text-red-600 font-semibold">Learn More →</button>
+                    <button class="text-red-600 font-semibold"> <a href="fests.html"> </a></button>
                 </div>
             </div>
         </div>
