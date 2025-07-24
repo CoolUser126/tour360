@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Winter Wonders - Places to Visit in Kathmandu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #fff9e6;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        #filter-container {
+            max-width: 700px;
+            margin: 0 auto 20px auto;
+            text-align: center;
+        }
+        #filter-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border: 2px solid #2980b9;
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        #filter-input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        .place {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 700px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .place:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        }
+        .place img {
+            width: 200px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+        .details {
+            flex-grow: 1;
+            overflow: hidden;
+        }
+        .details h2 {
+            color: #2980b9;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .summary {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .extra-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .extra-details.open {
+            max-height: 500px;
+        }
+        .extra-details p {
+            margin: 5px 0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #777;
+        }
+        @media (max-width: 768px) {
+            .place {
+                flex-direction: column;
+                align-items: center;
+            }
+            .place img {
+                width: 100%;
+                height: auto;
+            }
+            .details {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Winter Wonders - Places to Visit in Kathmandu</h1>
+    <div id="filter-container">
+        <input type="text" id="filter-input" placeholder="Filter places by name..." />
+    </div>
+    <div id="places-container"></div>
+
+    <footer>
+        &copy; 2024 Winter Wonders Kathmandu Travel Guide
+    </footer>
+
+    <script>
+        const places = [
+            {
+                name: "Pashupatinath Temple",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Pashupatinath_Temple_2016.jpg/320px-Pashupatinath_Temple_2016.jpg",
+                cost: "Free (Donation optional)",
+                time: "20-30 minutes from city center",
+                activities: "Explore the sacred Hindu temple complex, witness winter rituals, enjoy the serene Bagmati river views."
+            },
+            {
+                name: "Boudhanath Stupa",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Boudhanath_Stupa_2013.jpg/320px-Boudhanath_Stupa_2013.jpg",
+                cost: "Free (Donation optional)",
+                time: "30-40 minutes from city center",
+                activities: "Circumambulate the stupa, visit nearby monasteries, enjoy Tibetan culture and winter festivals."
+            },
+            {
+                name: "Garden of Dreams",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Garden_of_Dreams_-_Kathmandu_2013-11-03_001.jpg/320px-Garden_of_Dreams_-_Kathmandu_2013-11-03_001.jpg",
+                cost: "NPR 200 (approx. $1.50)",
+                time: "15-20 minutes from city center",
+                activities: "Relax in the beautifully restored historic garden, enjoy warm beverages at the cafe, attend winter events."
+            },
+            {
+                name: "Chandragiri Hills",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Chandragiri_Hills_cable_car.jpg/320px-Chandragiri_Hills_cable_car.jpg",
+                cost: "NPR 700 (cable car round trip, approx. $6)",
+                time: "1 hour from city center",
+                activities: "Take the cable car ride, enjoy panoramic views of Kathmandu valley and Himalayas, hike and picnic."
+            },
+            {
+                name: "Bhaktapur Durbar Square",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Bhaktapur_Durbar_Square_2013-11-03_001.jpg/320px-Bhaktapur_Durbar_Square_2013-11-03_001.jpg",
+                cost: "NPR 1500 (approx. $12)",
+                time: "30-40 minutes from city center",
+                activities: "Explore ancient palaces and temples, try local winter delicacies, shop for handicrafts."
+            }
+        ];
+
+        const container = document.getElementById('places-container');
+        const filterInput = document.getElementById('filter-input');
+
+        function createPlaceElement(place) {
+            const placeDiv = document.createElement('div');
+            placeDiv.className = 'place';
+
+            const img = document.createElement('img');
+            img.src = place.image;
+            img.alt = place.name;
+
+            const detailsDiv = document.createElement('div');
+            detailsDiv.className = 'details';
+
+            const name = document.createElement('h2');
+            name.textContent = place.name;
+
+            const summary = document.createElement('div');
+            summary.className = 'summary';
+            summary.textContent = `Estimated Cost: ${place.cost}`;
+
+            const extraDetails = document.createElement('div');
+            extraDetails.className = 'extra-details';
+
+            const time = document.createElement('p');
+            time.innerHTML = `<strong>Time to Reach:</strong> ${place.time}`;
+
+            const activities = document.createElement('p');
+            activities.innerHTML = `<strong>What to Do:</strong> ${place.activities}`;
+
+            extraDetails.appendChild(time);
+            extraDetails.appendChild(activities);
+
+            detailsDiv.appendChild(name);
+            detailsDiv.appendChild(summary);
+            detailsDiv.appendChild(extraDetails);
+
+            placeDiv.appendChild(img);
+            placeDiv.appendChild(detailsDiv);
+
+            // Toggle extra details on click
+            placeDiv.addEventListener('click', () => {
+                extraDetails.classList.toggle('open');
+            });
+
+            return placeDiv;
+        }
+
+        function renderPlaces(filter = '') {
+            container.innerHTML = '';
+            const filteredPlaces = places.filter(place =>
+                place.name.toLowerCase().includes(filter.toLowerCase())
+            );
+            filteredPlaces.forEach(place => {
+                container.appendChild(createPlaceElement(place));
+            });
+        }
+
+        filterInput.addEventListener('input', (e) => {
+            renderPlaces(e.target.value);
+        });
+
+    
+        renderPlaces();
+    </script>
+</body>
+</html>
