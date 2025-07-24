@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibrant Festivals of Nepal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: rgba(255, 255, 204, 0.1); /* Faded yellow background */
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            margin-bottom: 3rem;
+            border-radius: 0 0 50px 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #f1c40f, #48dbfb, #ff9ff3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .intro {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 1.1rem;
+            border: 3px solid #f1c40f;
+            position: relative;
+        }
+
+        .festivals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .festival-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .festival-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: all 0.5s;
+            transform: rotate(45deg);
+            opacity: 0;
+        }
+
+        .festival-card:hover::before {
+            animation: shine 0.7s ease-in-out;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+
+        .festival-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .festival-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .festival-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            margin-right: 1rem;
+            object-fit: cover;
+            border: 3px solid #f1c40f;
+            transition: transform 0.3s ease;
+        }
+
+        .festival-card:hover .festival-image {
+            transform: scale(1.1);
+        }
+
+        .festival-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .festival-description {
+            color: #555;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .festival-highlights {
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .festival-highlights h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .festival-highlights ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .festival-highlights li {
+            margin-bottom: 0.3rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .festival-highlights li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+        }
+
+        /* Festival specific highlight colors */
+        .dashain .festival-highlights {
+            background: rgba(231, 76, 60, 0.7); /* Soft Red */
+        }
+        .tihar .festival-highlights {
+            background: rgba(243, 156, 18, 0.7); /* Soft Orange */
+        }
+        .buddha .festival-highlights {
+            background: rgba(39, 174, 96, 0.7); /* Soft Green */
+        }
+        .indra .festival-highlights {
+            background: rgba(52, 152, 219, 0.7); /* Soft Blue */
+        }
+        .holi .festival-highlights {
+            background: rgba(233, 30, 99, 0.7); /* Soft Pink */
+        }
+        .teej .festival-highlights {
+            background: rgba(155, 89, 182, 0.7); /* Soft Purple */
+        }
+        .shivaratri .festival-highlights {
+            background: rgba(52, 73, 94, 0.7); /* Soft Dark Blue */
+        }
+        .lhosar .festival-highlights {
+            background: rgba(22, 160, 133, 0.7); /* Soft Teal */
+        }
+
+        .dashain { border-left: 5px solid #e74c3c; }
+        .tihar { border-left: 5px solid #f39c12; }
+        .buddha { border-left: 5px solid #27ae60; }
+        .indra { border-left: 5px solid #3498db; }
+        .holi { border-left: 5px solid #e91e63; }
+        .teej { border-left: 5px solid #9b59b6; }
+        .shivaratri { border-left: 5px solid #34495e; }
+        .lhosar { border-left: 5px solid #16a085; }
+
+        .harmony-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .harmony-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #667eea, #f1c40f, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .harmony-text {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .cultural-symbols {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .symbol {
+            font-size: 3rem;
+            animation: pulse 2s infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .symbol:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.1rem; }
+            .festivals-grid { grid-template-columns: 1fr; }
+            .cultural-symbols { gap: 1rem; }
+            .symbol { font-size: 2.5rem; }
+            .intro { padding: 1.5rem; }
+            .harmony-section { padding: 2rem; }
+            .festival-image { width: 60px; height: 60px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Vibrant Festivals of Nepal</h1>
+                <p class="subtitle">Experience the Colors, Traditions, and Harmony of Nepalese Culture</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="intro">
+            <p>Nepal's festivals are a magnificent tapestry of colors, traditions, and spiritual celebration that bring together diverse communities in joyous harmony. These vibrant occasions showcase the country's rich cultural heritage, where Hindu and Buddhist traditions interweave beautifully, creating unforgettable experiences that touch the soul and illuminate the spirit of unity that defines Nepal.</p>
+        </div>
+
+        <div class="festivals-grid">
+            <div class="festival-card dashain">
+                <div class="festival-header">
+                    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=100&h=100&fit=crop&crop=center" alt="Dashain Festival" class="festival-image">
+                    <h2 class="festival-title">Dashain</h2>
+                </div>
+                <p class="festival-description">
+                    The grandest festival of Nepal, Dashain celebrates the victory of good over evil. Lasting 15 days, this Hindu festival brings families together from across the country and abroad. The festival honors Goddess Durga and features elaborate rituals, flying colorful kites, and the exchange of blessings between elders and younger family members.
+                </p>
+                <div class="festival-highlights">
+                    <h4>Festival Highlights:</h4>
+                    <ul>
+                        <li>Family reunions and traditional feasts</li>
+                        <li>Kite flying competitions filling the sky with colors</li>
+                        <li>Receiving tika and jamara blessings</li>
+                        <li>Animal sacrifices at temples</li>
+                        <li>Traditional music and dance performances</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="festival-card tihar">
+                <div class="festival-header">
+                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=100&h=100&fit=crop&crop=center" alt="Tihar Festival" class="festival-image">
+                    <h2 class="festival-title">Tihar</h2>
+                </div>
+                <p class="festival-description">
+                    Known as the "Festival of Lights," Tihar illuminates Nepal with thousands of oil lamps, candles, and colorful lights. This five-day celebration honors different animals and deities each day, including crows, dogs, cows, and oxen. The festival culminates with Gai Tihar and Govardhan Puja, creating a magical atmosphere throughout the country.
+                </p>
+                <div class="festival-highlights">
+                    <h4>Festival Highlights:</h4>
+                    <ul>
+                        <li>Houses decorated with oil lamps and lights</li>
+                        <li>Deusi-Bhailo caroling and singing</li>
+                        <li>Honoring animals with garlands and treats</li>
+                        <li>Sisters blessing brothers with colorful tika</li>
+                        <li>Rangoli patterns adorning doorsteps</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="festival-card buddha">
+                <div class="festival-header">
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=100&h=100&fit=crop&crop=center" alt="Buddha Jayanti" class="festival-image">
+                    <h2 class="festival-title">Buddha Jayanti</h2>
+                </div>
+                <p class="festival-description">
+                    Celebrating the birth, enlightenment, and death of Lord Buddha, this sacred festival holds special significance in Nepal, the birthplace of Buddhism. Thousands of pilgrims gather at Lumbini and other Buddhist sites. The festival promotes peace, compassion, and spiritual reflection, with colorful prayer flags fluttering in the wind and monks chanting ancient prayers.
+                </p>
+                <div class="festival-highlights">
+                    <h4>Festival Highlights:</h4>
+                    <ul>
+                        <li>Pilgrimage to Lumbini, Buddha's birthplace</li>
+                        <li>Colorful prayer flag ceremonies</li>
+                        <li>Meditation and spiritual teachings</li>
+                        <li>Buddhist monasteries hosting special events</li>
+                        <li>Peaceful processions and candlelight vigils</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="festival-card indra">
+                <div class="festival-header">
+                    <img src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=100&h=100&fit=crop&crop=center" alt="Indra Jatra" class="festival-image">
+                    <h2 class="festival-title">Indra Jatra</h2>
+                </div>
+                <p class="festival-description">
+                    The vibrant street festival of Kathmandu, Indra Jatra transforms the ancient city into a spectacular celebration of art, culture, and tradition. Masked dancers perform in the streets, giant chariots parade through narrow alleys, and the living goddess Kumari makes her rare public appearances. This eight-day festival showcases Nepal's incredible cultural diversity.
+                </p>
+                <div class="festival-highlights">
+                    <h4>Festival Highlights:</h4>
+                    <ul>
+                        <li>Spectacular masked dance performances</li>
+                        <li>Kumari's chariot procession</li>
+                        <li>Traditional Newari cultural displays</li>
+                        <li>Street food and cultural exchanges</li>
+                        <li>Ancient rituals in Durbar Square</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="festival-card holi">
+                <div class="festival-header">
+                    <img src="https://images.unsplash.com/photo-1583339793403-3d9b001b6008?w=100&h=100&fit=crop&crop=center" alt="Holi Festival" class="festival-image">
+                    <h2 class="festival-title">Holi (Fagu Purnima)</h2>
+                </div>
+                <p class="festival-description">
+                    The festival of colors, Holi celebrates the arrival of spring and the triumph of good over evil. People of all ages throw colored powders and water at each other, creating a joyous atmosphere of unity and celebration. The festival is marked by music, dancing, and the spirit of forgiveness and renewal.
+                </p>
+                <div class="festival-highlights">
+                    <h4>Festival Highlights:</h4>
+                    <ul>
+                        <li>Throwing vibrant colored powders (gulal)</li>
+                        <li>Water balloon fights and celebrations</li>
+                        <li>Traditional sweets like gujiya and bhang</li>
+                        <li>Holika bonfire the night before</li>
+                        <li>Music, dancing, and community gatherings</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="festival-card teej">
+                <div class="festival-header">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop&crop=center" alt="Teej Festival" class="festival-image">
+                    <h2 class="festival-title">Teej</h2>
+                </div>
+                <p class="festival-description">
+                    A festival dedicated to women, Teej celebrates the bond between married couples and honors the goddess Parvati. Women dress in red saris, fast for their husbands' long life, and perform traditional dances. The festival is known for its vibrant red color, traditional songs, and the strong sisterhood displayed among women.
+                </p>
+                <div class="festival-highlights">
+                    <h4>Festival Highlights:</h4>
+                    <ul>
+                        <li>Women wearing beautiful red saris</li>
+                        <li>Traditional Teej songs and dances</li>
+                        <li>Fasting rituals for marital bliss</li>
+                        <li>Special feast called Dar (the day before fasting)</li>
+                        <li>Swinging ceremonies and community
