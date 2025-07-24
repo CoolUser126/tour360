@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cultural Dances of Nepal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: rgba(255, 255, 204, 0.1); /* Faded yellow background */
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            margin-bottom: 3rem;
+            border-radius: 0 0 50px 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #f1c40f, #48dbfb, #ff9ff3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .intro {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 1.1rem;
+            border: 3px solid #f1c40f;
+            position: relative;
+        }
+
+        .dances-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .dance-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dance-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: all 0.5s;
+            transform: rotate(45deg);
+            opacity: 0;
+        }
+
+        .dance-card:hover::before {
+            animation: shine 0.7s ease-in-out;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+
+        .dance-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .dance-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .dance-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            margin-right: 1rem;
+            object-fit: cover;
+            border: 3px solid #f1c40f;
+            transition: transform 0.3s ease;
+        }
+
+        .dance-card:hover .dance-image {
+            transform: scale(1.1);
+        }
+
+        .dance-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .dance-description {
+            color: #555;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .dance-highlights {
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .dance-highlights h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .dance-highlights ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .dance-highlights li {
+            margin-bottom: 0.3rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .dance-highlights li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+        }
+
+        /* Dance specific highlight colors */
+        .lakhey .dance-highlights {
+            background: rgba(231, 76, 60, 0.7); /* Soft Red */
+        }
+        .dhime .dance-highlights {
+            background: rgba(243, 156, 18, 0.7); /* Soft Orange */
+        }
+        .maruni .dance-highlights {
+            background: rgba(39, 174, 96, 0.7); /* Soft Green */
+        }
+        .sorathi .dance-highlights {
+            background: rgba(52, 152, 219, 0.7); /* Soft Blue */
+        }
+        .chyabrung .dance-highlights {
+            background: rgba(233, 30, 99, 0.7); /* Soft Pink */
+        }
+        .deuda .dance-highlights {
+            background: rgba(155, 89, 182, 0.7); /* Soft Purple */
+        }
+        .dhan .dance-highlights {
+            background: rgba(52, 73, 94, 0.7); /* Soft Dark Blue */
+        }
+        .ghatu .dance-highlights {
+            background: rgba(22, 160, 133, 0.7); /* Soft Teal */
+        }
+        .kaura .dance-highlights {
+            background: rgba(255, 165, 0, 0.7); /* Soft Orange */
+        }
+        .sherpa .dance-highlights {
+            background: rgba(128, 0, 128, 0.7); /* Soft Purple */
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.1rem; }
+            .dances-grid { grid-template-columns: 1fr; }
+            .dance-image { width: 60px; height: 60px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Cultural Dances of Nepal</h1>
+                <p class="subtitle">Experience the Richness of Nepalese Dance Traditions</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="intro">
+            <p>Nepal's cultural dances are a vibrant expression of its rich heritage, showcasing the diversity of its communities. Each dance tells a story, reflects traditions, and brings people together in celebration. Here are some of the most notable cultural dances from various ethnic groups in Nepal.</p>
+        </div>
+
+        <div class="dances-grid">
+            <div class="dance-card lakhey">
+                <div class="dance-header">
+                    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=100&h=100&fit=crop&crop=center" alt="Lakhey Dance" class="dance-image">
+                    <h2 class="dance-title">Lakhey Dance (लाखे नाच)</h2>
+                </div>
+                <p class="dance-description">
+                    A wild, demon-like dance performed during Indra Jatra, Lakhey is considered a protector of children and the community.
+                </p>
+                <div class="dance-highlights">
+                    <h4>Dance Highlights:</h4>
+                    <ul>
+                        <li>Origin: Kathmandu Valley</li>
+                        <li>Features: Red mask, long hair, loud drums</li>
+                        <li>Significance: Protector of children and community</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="dance-card dhime">
+                <div class="dance-header">
+                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=100&h=100&fit=crop&crop=center" alt="Dhime Dance" class="dance-image">
+                    <h2 class="dance-title">Dhime Dance</h2>
+                </div>
+                <p class="dance-description">
+                    A rhythmic dance performed in groups during festivals like Gai Jatra and Biska Jatra, featuring the Dhime drum and cymbals.
+                </p>
+                <div class="dance-highlights">
+                    <h4>Dance Highlights:</h4>
+                    <ul>
+                        <li>Origin: Kathmandu Valley</li>
+                        <li>Instruments: Dhime (double-headed drum), cymbals</li>
+                        <li>Type: Group performance with rhythmic stepping</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="dance-card maruni">
+                <div class="dance-header">
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=100&h=100&fit=crop&crop=center" alt="Maruni Dance" class="dance-image">
+                    <h2 class="dance-title">Maruni Dance</h2>
+                </div>
+                <p class="dance-description">
+                    A joyful dance performed during Tihar and weddings, where men dress up as women and dance with enthusiasm.
+                </p>
+                <div class="dance-highlights">
+                    <h4>Dance Highlights:</h4>
+                    <ul>
+                        <li>Region: Eastern and Western Nepal</li>
+                        <li>Instruments: Madal, Sarangi, and singing</li>
+                        <li>Occasion: Tihar, weddings, and celebrations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="dance-card sorathi">
+                <div class="dance-header">
+                    <img src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=100&h=100&fit=crop&crop=center" alt="Sorathi Dance" class="dance-image">
+                    <h2 class="dance-title">Sorathi Dance</h2>
+                </div>
+                <p class="dance-description">
+                    A circular dance that tells the story of a queen and her twelve sisters, performed with singing folk ballads.
+                </p>
+                <div class="dance-highlights">
+                    <h4>Dance Highlights:</h4>
+                    <ul>
+                        <li>Region: Western Nepal (Lamjung, Gorkha)</li>
+                        <li>Performance: Circular dance with traditional costumes</li>
+                        <li>Costume: Traditional Gurung dress and ornaments</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="dance-card chyabrung">
+                <div class="dance-header">
+                    <img src="https://images.unsplash.com/photo-1583339793403-3d9b001b6008?w=100&h=100&fit=crop&crop=center" alt="Chyabrung Dance" class="dance-image">
+                    <h2 class="dance-title">Chyabrung Dance</h2>
+                </div>
+                <p class="dance-description">
+                    A high-energy dance with martial moves, performed during the Udhauli and Ubhauli festivals.
+                </p>
+                <div class="dance-highlights">
+                    <h4>Dance Highlights:</h4>
+                    <ul>
+                        <li>Region: Eastern Nepal</li>
+                        <li>Instruments: Chyabrung (a special drum)</li>
+                        <li>Style: Energetic dance with martial elements</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="dance-card deuda">
+                <div class="dance-header">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop&crop=center" alt="Deuda Dance" class="dance-image">
+                    <h2 class="dance-title">Deuda Dance</h2>
+                </div>
+                <p class="dance-description">
+                    A circle dance performed by men and women, symbolizing unity and friendship during Dashain and Tihar.
+                </p>
+                <div class="dance-highlights">
+                    <h4>Dance Highlights:</h4>
+                    <ul>
+                        <li>Region: Karnali & Far Western Region</li>
+                        <li>Style: Call-and-response singing and dancing</li>
+                        <li>Occasion: Dashain, Tihar, and local fairs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="dance-card dhan">
+                <div class="dance-header">
+                    <img src="https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=100&h=100&fit=crop&crop=center" alt="Dhan Nach" class="dance-image">
+                    <h2 class="dance-title">Dhan Nach (Paddy Dance)</h2>
+                </div>
+                <p class="dance-description">
+                    A dance performed during the harvest season to express gratitude to nature and ancestors for the rice crop.
+                </p>
+                <div class="dance-highlights">
+                    <h4>Dance Highlights:</h4>
+                    <ul>
+                        <li>Region: Eastern hills</li>
+                        <li>Occasion: Harvest season</li>
+                        <li>Meaning: Gratitude for the rice crop</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="dance-card ghatu">
+                <div class="dance-header">
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=100&h=100&fit=crop&crop=center" alt="Ghatu Dance" class="dance-image">
+                    <h2 class="dance-title">Ghatu Dance</h2>
+                </div>
+                <p class="dance-description">
+                    A dance performed during the Ghatu festival, often depicting romantic or heroic epics.
+                </p>
+                <div class="dance-highlights">
+                    <h4>Dance Highlights:</h4>
+                    <ul>
+                        <li>Occasion: Spring season, Ghatu festival</li>
+                        <li>Theme: Romantic or heroic stories</li>
+                        <li>Performers: Mostly young girls in trance-like states</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="dance-card kaura">
+                <div class="dance-header">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop&crop=center" alt="Kaura Dance" class="dance-image">
+                    <h2 class="dance-title">Kaura Dance</h2>
+                </div>
+                <p class="dance-description">
+                    A rhythmic group dance with flirtatious themes, showcasing bright and colorful cultural outfits.
+                </p>
+                <div class="dance-highlights">
+                    <h4>Dance Highlights:</h4>
+                    <ul>
+                        <li>Region: Western Nepal</li>
+                        <li>Style: Rhythmic group dance</li>
+                        <li>Clothing: Bright, colorful cultural outfits</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="dance-card sherpa">
+                <div class="dance-header">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop&crop=center" alt="Sherpa Dance" class="dance-image">
+                    <h2 class="dance-title">Sherpa Dance</h2>
+                </div>
+                <p class="dance-description">
+                    A traditional dance performed during Lhosar and other festivals, featuring drums, cymbals, and horns.
+                </p>
+                <div class="dance-highlights">
+                    <h4>Dance Highlights:</h4>
+                    <ul>
+                        <li>Region: Himalayan belt (Solukhumbu)</li>
+                        <li>Occasion: Lhosar and other festivals</li>
+                        <li>Instruments: Traditional drums, cymbals, horns</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Experience the beauty and diversity of Nepal's cultural dances, where each performance tells a unique story and celebrates the rich heritage of its people.</p>
+        </div>
+    </footer>
+</body>
+</html>

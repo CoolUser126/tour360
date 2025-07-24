@@ -1,221 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Winter Wonders - Places to Visit in Kathmandu</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wintere Wonders</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #fff9e6;
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-        }
-        #filter-container {
-            max-width: 700px;
-            margin: 0 auto 20px auto;
-            text-align: center;
-        }
-        #filter-input {
-            width: 100%;
-            padding: 10px;
-            font-size: 1em;
-            border: 2px solid #2980b9;
-            border-radius: 8px;
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
-            transition: border-color 0.3s ease;
         }
-        #filter-input:focus {
-            border-color: #3498db;
-            outline: none;
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: rgba(255, 255, 204, 0.1);
+            min-height: 100vh;
         }
-        .place {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            margin: 20px auto;
-            padding: 20px;
-            max-width: 700px;
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            margin-bottom: 3rem;
+            border-radius: 0 0 50px 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #f1c40f, #48dbfb, #ff9ff3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .intro {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 1.1rem;
+            border: 3px solid #f1c40f;
+            position: relative;
+        }
+
+        .placess-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .places-card {
+            background: rgba(235, 223, 223, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .place:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+
+        .places-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: all 0.5s;
+            transform: rotate(45deg);
+            opacity: 0;
         }
-        .place img {
-            width: 200px;
-            height: 140px;
+
+        .places-card:hover::before {
+            animation: shine 0.7s ease-in-out;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+
+        .places-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .places-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .places-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            margin-right: 1rem;
             object-fit: cover;
-            border-radius: 8px;
-            flex-shrink: 0;
+            border: 3px solid #f1c40f;
+            transition: transform 0.3s ease;
         }
-        .details {
-            flex-grow: 1;
-            overflow: hidden;
+
+        .places-card:hover .places-image {
+            transform: scale(1.1);
         }
-        .details h2 {
-            color: #2980b9;
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-        .summary {
+
+        .places-title {
+            font-size: 1.8rem;
+            color: #37526d;
             font-weight: bold;
-            margin-bottom: 10px;
         }
-        .extra-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
+
+        .places-description {
+            color: #744646;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            line-height: 1.7;
         }
-        .extra-details.open {
-            max-height: 500px;
+
+        .places-highlights {
+            color: rgb(209, 122, 122);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
         }
-        .extra-details p {
-            margin: 5px 0;
+
+        .places-highlights h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
         }
+
+        .places-highlights ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .places-highlights li {
+            margin-bottom: 0.3rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+
+        .Chandragiri .places-highlights {
+            background: rgba(253, 255, 254, 0.7); 
+        }
+        .shivapuri .places-highlights {
+            background: rgba(241, 238, 232, 0.7); 
+        }
+        .Chisapani .places-highlights {
+            background: #e3e8f3b3; 
+        }
+        .Khopra .places-highlights {
+            background: rgba(239, 246, 250, 0.7); 
+        }
+       
+
+        .Chandragiri { border-left: 5px solid #a74337; }
+        .shivapuri { border-left: 5px solid #c28016; }
+        .Chisapani { border-left: 5px solid #27ae60; }
+        .Khopra { border-left: 5px solid #3498db; }
+
+        .harmony-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .harmony-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #667eea, #f1c40f, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .harmony-text {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .cultural-symbols {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .symbol {
+            font-size: 3rem;
+            animation: pulse 2s infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .symbol:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
         footer {
             text-align: center;
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #777;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
         }
+
         @media (max-width: 768px) {
-            .place {
-                flex-direction: column;
-                align-items: center;
-            }
-            .place img {
-                width: 100%;
-                height: auto;
-            }
-            .details {
-                width: 100%;
-            }
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.1rem; }
+            .placess-grid { grid-template-columns: 1fr; }
+            .cultural-symbols { gap: 1rem; }
+            .symbol { font-size: 2.5rem; }
+            .intro { padding: 1.5rem; }
+            .harmony-section { padding: 2rem; }
+            .places-image { width: 60px; height: 60px; }
         }
     </style>
 </head>
 <body>
-    <h1>Winter Wonders - Places to Visit in Kathmandu</h1>
-    <div id="filter-container">
-        <input type="text" id="filter-input" placeholder="Filter places by name..." />
-    </div>
-    <div id="places-container"></div>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Winter wonders</h1>
+            </div>
+        </div>
+    </header>
 
-    <footer>
-        &copy; 2024 Winter Wonders Kathmandu Travel Guide
-    </footer>
+    <div class="container">
+        <div class="intro">
+            <p>Nepal's placess are a magnificent tapestry of colors, traditions, and spiritual celebration that bring together diverse communities in joyous harmony. These vibrant occasions showcase the country's rich cultural heritage, where Hindu and Buddhist traditions interweave beautifully, creating unforgettable experiences that touch the soul and illuminate the spirit of unity that defines Nepal.</p>
+        </div>
 
-    <script>
-        const places = [
-            {
-                name: "Pashupatinath Temple",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Pashupatinath_Temple_2016.jpg/320px-Pashupatinath_Temple_2016.jpg",
-                cost: "Free (Donation optional)",
-                time: "20-30 minutes from city center",
-                activities: "Explore the sacred Hindu temple complex, witness winter rituals, enjoy the serene Bagmati river views."
-            },
-            {
-                name: "Boudhanath Stupa",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Boudhanath_Stupa_2013.jpg/320px-Boudhanath_Stupa_2013.jpg",
-                cost: "Free (Donation optional)",
-                time: "30-40 minutes from city center",
-                activities: "Circumambulate the stupa, visit nearby monasteries, enjoy Tibetan culture and winter festivals."
-            },
-            {
-                name: "Garden of Dreams",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Garden_of_Dreams_-_Kathmandu_2013-11-03_001.jpg/320px-Garden_of_Dreams_-_Kathmandu_2013-11-03_001.jpg",
-                cost: "NPR 200 (approx. $1.50)",
-                time: "15-20 minutes from city center",
-                activities: "Relax in the beautifully restored historic garden, enjoy warm beverages at the cafe, attend winter events."
-            },
-            {
-                name: "Chandragiri Hills",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Chandragiri_Hills_cable_car.jpg/320px-Chandragiri_Hills_cable_car.jpg",
-                cost: "NPR 700 (cable car round trip, approx. $6)",
-                time: "1 hour from city center",
-                activities: "Take the cable car ride, enjoy panoramic views of Kathmandu valley and Himalayas, hike and picnic."
-            },
-            {
-                name: "Bhaktapur Durbar Square",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Bhaktapur_Durbar_Square_2013-11-03_001.jpg/320px-Bhaktapur_Durbar_Square_2013-11-03_001.jpg",
-                cost: "NPR 1500 (approx. $12)",
-                time: "30-40 minutes from city center",
-                activities: "Explore ancient palaces and temples, try local winter delicacies, shop for handicrafts."
-            }
-        ];
+        <div class="placess-grid">
+            <div class="places-card Chandragiri Hills">
+                <div class="places-header">
+                    <img src="cgiri.jpg" alt="Chandragiri Hills places" class="places-image">
+                    <h2 class="places-title">Chandragiri Hills</h2>
+                </div>
+                <p class="places-description">
+                    Chandragiri Hills, located on the outskirts of Kathmandu, offers a serene escape into nature. The area is known for its stunning panoramic views of the Himalayas, lush greenery, and rich biodiversity. Visitors can enjoy hiking, picnicking, and exploring the local flora and fauna, making it a perfect destination for nature lovers and adventure seekers alike.
+                </p>
+                <div class="places-highlights">
+                    <h4>places Highlights:</h4>
+                    <ul>
+                        <li> - cable car ride with snow at the hill top.</li>
+                        <li>- The Bhaleshwor Mahadev Temple</li>
+                        <li>- The panormic view of surrounding hills</li>
+                        <li>-  Majestic Himalayan mountain range</li>
+                    </ul>
+                </div>
+            </div>
 
-        const container = document.getElementById('places-container');
-        const filterInput = document.getElementById('filter-input');
+            <div class="places-card shivapuri peak">
+                <div class="places-header">
+                    <img src="shivpuri.jpg" alt="shivapuri places" class="places-image">
+                    <h2 class="places-title">shivapuri</h2>
+                </div>
+                <p class="places-description">
+                    Shivapuri, a serene national park near Kathmandu, is a haven for nature enthusiasts and trekkers. The park is home to diverse wildlife, lush forests, and scenic trails that lead to the Shivapuri Peak. Visitors can explore the tranquil surroundings, enjoy birdwatching, and experience the rich biodiversity of this protected area.
+                </p>
+                <div class="places-highlights">
+                    <h4>places Highlights:</h4>
+                    <ul>
+                        <li>- Peaceful forest trail with Buddhist stupas and birdwatching</li>
+                        <li>- Scenic views from Shivapuri Peak</li>
+                        <li>- Diverse flora and fauna</li>
+                        <li>- Tranquil picnic spots</li>
+                        <li>- Rich cultural heritage</li>
+                    </ul>
+                </div>
+            </div>
 
-        function createPlaceElement(place) {
-            const placeDiv = document.createElement('div');
-            placeDiv.className = 'place';
+            <div class="places-card Chisapani">
+                <div class="places-header">
+                    <img src="chisap.jpg" alt="Chisapani Ridge" class="places-image">
+                    <h2 class="places-title">Chisapani Ridge</h2>
+                </div>
+                <p class="places-description">
+                    Chisapani Ridge, located just a few hours' trek from Kathmandu, offers breathtaking views of the Himalayas and a chance to experience the tranquility of nature. The ridge is a popular spot for both local and international trekkers, providing a perfect getaway from the hustle and bustle of city life.
+                </p>
+                <div class="places-highlights">
+                    <h4>places Highlights:</h4>
+                    <ul>
+                        <li>Forested trail through Shivapuri National Park</li>
+                        <li>Offers views of snow-dusted Langtang and Himalayan villages</li>
+                        <li>Stunning view of sunset </li>
+                        <li>Peaceful atmosphere with local tea houses</li>
+                        <li>Rich biodiversity and birdwatching opportunities</li>
+                    </ul>
+                </div>
+            </div>
 
-            const img = document.createElement('img');
-            img.src = place.image;
-            img.alt = place.name;
-
-            const detailsDiv = document.createElement('div');
-            detailsDiv.className = 'details';
-
-            const name = document.createElement('h2');
-            name.textContent = place.name;
-
-            const summary = document.createElement('div');
-            summary.className = 'summary';
-            summary.textContent = `Estimated Cost: ${place.cost}`;
-
-            const extraDetails = document.createElement('div');
-            extraDetails.className = 'extra-details';
-
-            const time = document.createElement('p');
-            time.innerHTML = `<strong>Time to Reach:</strong> ${place.time}`;
-
-            const activities = document.createElement('p');
-            activities.innerHTML = `<strong>What to Do:</strong> ${place.activities}`;
-
-            extraDetails.appendChild(time);
-            extraDetails.appendChild(activities);
-
-            detailsDiv.appendChild(name);
-            detailsDiv.appendChild(summary);
-            detailsDiv.appendChild(extraDetails);
-
-            placeDiv.appendChild(img);
-            placeDiv.appendChild(detailsDiv);
-
-            // Toggle extra details on click
-            placeDiv.addEventListener('click', () => {
-                extraDetails.classList.toggle('open');
-            });
-
-            return placeDiv;
-        }
-
-        function renderPlaces(filter = '') {
-            container.innerHTML = '';
-            const filteredPlaces = places.filter(place =>
-                place.name.toLowerCase().includes(filter.toLowerCase())
-            );
-            filteredPlaces.forEach(place => {
-                container.appendChild(createPlaceElement(place));
-            });
-        }
-
-        filterInput.addEventListener('input', (e) => {
-            renderPlaces(e.target.value);
-        });
-
-    
-        renderPlaces();
-    </script>
-</body>
-</html>
+            <div class="places-card Khopra">
+                <div class="places-header">
+                    <img src="khoprad.jpg" alt="Khopra Danda Trek" class="places-image">
+                    <h2 class="places-title">Khopra Danda Trek</h2>
+                </div>
+                <p class="places-description">
+                  Khopra Danda Trek, a hidden gem in the Annapurna region, offers stunning views of the Annapurna and Dhaulagiri mountain ranges. This less-traveled trail takes you through charming villages, lush rhododendron forests, and pristine landscapes, making it a perfect choice for adventurous trekkers seeking tranquility and natural beauty. 
+                </p>
+                <div class="places-highlights">
+                    <h4>places Highlights:</h4>
+                    <ul>
+                        <li>Stunning view of Annapurna and Dhaulagiri mountain ranges</li>
+                        <li>Charming villages along the trail</li>
+                        <li>Lush rhododendron forests</li>
+                        <li>Pristine landscapes and natural beauty</li>
+                        <li>Rich biodiversity and birdwatching opportunities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
