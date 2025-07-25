@@ -60,8 +60,15 @@ if (!user || storedPass !== pass) {
 
 saveCurrentUser(user);
 
-window.location.href = "/dashboard.html";
+window.location.href = "/details/dashboard.html";
 }
+
+// for dashboard page
+const greet = document.getElementById("greet");
+const user = getCurrentUser();
+
+if (greet)
+    greet.innerHTML = "Welcome " + user + " !";
 
 //review page
 
