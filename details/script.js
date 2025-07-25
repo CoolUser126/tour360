@@ -63,5 +63,5 @@ saveCurrentUser(user);
 window.location.href = "/dashboard.html";
 }
 
-// for review page
+//review page
 
